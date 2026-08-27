@@ -1,7 +1,9 @@
 name: nikto_engine
-description: Web server security auditor and misconfiguration scanner for Dart & Flutter. Inspired by Nikto2.
+description: Web server security header auditor and misconfiguration scanner for Dart and Flutter.
 version: 2.0.0
-publish_to: none
+repository: https://github.com/AbdoFawzi777/nikto_engine
+homepage: https://github.com/AbdoFawzi777/nikto_engine
+issue_tracker: https://github.com/AbdoFawzi777/nikto_engine/issues
 
 environment:
   sdk: '>=3.3.0 <4.0.0'
