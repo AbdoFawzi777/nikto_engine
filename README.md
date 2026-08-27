@@ -1,66 +1,99 @@
-# Nikto Engine (`nikto_engine`)
+<div align="center">
 
-> Web Server Misconfiguration & Vulnerability Scanner  
-> **Author & Original Architect:** [Abdallah Fawzi Ali Mahmoud](https://github.com/AbdoFawzi777)  
-> **Part of the RedOps Hub Monorepo Suite**
+# 🌐 Nikto Engine for Dart & Flutter
 
----
+**v2.0.0 — Sovereign On-Device Security Engine for Dart & Flutter**
 
-## 📌 Overview
-`nikto_engine` is a production-grade, standalone Flutter package engineered for high-performance mobile security auditing. Built with pure Dart and native Flutter MethodChannels/Isolates, it delivers enterprise-level capability directly on Android & iOS devices without relying on external Linux command-line dependencies.
+[![Dart](https://img.shields.io/badge/Dart-3.x-0175C2?logo=dart)](https://dart.dev)
+[![Flutter](https://img.shields.io/badge/Flutter-3.x-02569B?logo=flutter)](https://flutter.dev)
+[![License](https://img.shields.io/badge/License-MIT-red.svg)](LICENSE)
+[![Version](https://img.shields.io/badge/Version-2.0.0-E05555)](https://github.com/AbdoFawzi777/nikto_engine/releases)
+[![RedOps Hub](https://img.shields.io/badge/Integrated_in-RedOps_Hub_v2.0-6C3AED)](https://github.com/AbdoFawzi777/redops-hub)
 
----
+*Part of the RedOps Hub Sovereign Mobile Security Suite.*
 
-## 🚀 New Capabilities & Features (v2.0)
-- **Comprehensive Vulnerability Checks:** Scans for over 6,700 dangerous files, CGIs, and outdated server components.
-- **Security Header Inspection:** Audits HSTS, CSP, X-Frame-Options, X-Content-Type-Options, and Server tokens.
-- **Outdated Software Detection:** Flags vulnerable web server versions (Apache, Nginx, IIS, LiteSpeed).
-- **Subdomain & Port Customization:** Full support for non-standard web ports and SSL endpoints.
+</div>
 
 ---
 
-## 🛠 Usage & Integration
+## 📖 Overview
 
-Add `nikto_engine` to your Flutter `pubspec.yaml`:
+`nikto_engine` is a production-grade, 100% on-device Dart/Flutter package designed for mobile security auditing, defensive telemetry extraction, and penetration testing automation.
+
+> **🔒 Sovereignty Mandate:** All operations execute locally in memory and over direct socket/HTTP requests. Zero third-party telemetry, tracking, or cloud dependencies.
+
+---
+
+## ✨ Key Capabilities
+
+- 🛡️ **50+ Security Header Checks**: Validates HSTS, CSP, X-Frame-Options, X-Content-Type-Options, COOP, Referrer-Policy.
+- 🚨 **Vulnerable Server & CVE Matching**: Fingerprints server banners against known vulnerable versions (Apache, Nginx, PHP, OpenSSL, IIS).
+- 🍪 **Cookie Security Auditor**: Detects missing `HttpOnly`, `Secure`, and `SameSite` flags.
+- 🔓 **CORS Misconfiguration Detection**: Identifies wildcard `*` origins and arbitrary origin reflection.
+- 📁 **Sensitive Resource Probing**: Scans for exposed `.git/HEAD`, `.env`, backup archives, and Spring Boot `/actuator` endpoints.
+
+---
+
+## 📦 Installation
+
+Add `nikto_engine` to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
   nikto_engine:
-    path: ../packages/nikto_engine
+    git:
+      url: https://github.com/AbdoFawzi777/nikto_engine.git
+      ref: main
 ```
 
-### Basic Example
+Or for local monorepo development:
+
+```yaml
+dependencies:
+  nikto_engine:
+    path: packages/nikto_engine
+```
+
+---
+
+## 🚀 Quick Start & Usage
 
 ```dart
 import 'package:nikto_engine/nikto_engine.dart';
 
 void main() async {
   final engine = NiktoEngine();
-  
-  print('Starting Nikto Engine audit...');
-  final results = await engine.execute(
-    target: '192.168.1.1',
-  );
-  
-  print('Audit Complete!');
+  await engine.initialize();
+
+  final result = await engine.scan('https://example.com');
+  print('Server Banner: ${result.serverBanner}');
+  print('Total Findings: ${result.totalFindings}');
+  for (final f in result.findings) {
+    print('[${f.severity.name.toUpperCase()}] ${f.type}: ${f.detail}');
+    if (f.cve != null) print('  CVE: ${f.cve}');
+  }
 }
 ```
 
 ---
 
-## 🔒 Security & Privacy
-- **Zero Telemetry:** No analytics, tracking, or network calls home.
-- **Encrypted Local Storage:** Integrates seamlessly with RedOps Hub AES-256 local database.
-- **Thread Safety:** All heavy operations execute inside Dart Isolates to maintain 60fps UI rendering.
+## 🛡️ Anti-Fake Telemetry Integration
+
+`nikto_engine` is built to interface directly with the **RedOps Hub Anti-Fake Verification Pipeline**. All returned data structures contain genuine socket/HTTP evidence objects, raw status headers, and timestamps, preventing synthetic or hallucinated results in downstream AI aggregators.
 
 ---
 
-## 👤 Author & Copyright
+## 📄 License & Legal Notice
 
-**Abdallah Fawzi Ali Mahmoud**  
-Lead Developer & Security Architect of RedOps Hub  
-- **GitHub:** [@AbdoFawzi777](https://github.com/AbdoFawzi777)  
-- **Telegram:** [@ABdo_FawZi1](https://telegram.me/ABdo_FawZi1)  
-- **Website:** [RedOps Hub Platform](https://redops-hub.web.app)
+> **⚠️ Legal Notice:** This tool is designed exclusively for authorized penetration testing, security auditing, and educational research. Always obtain explicit written authorization before scanning target infrastructure.
 
-*Copyright (c) 2026 Abdallah Fawzi Ali Mahmoud. All rights reserved.*
+Distributed under the **MIT License**. Copyright (c) 2026 **Eng. Abdallah Fawzi Ali Mahmoud**.
+
+---
+
+<div align="center">
+
+Maintained by **[Abdallah Fawzi Ali Mahmoud](https://github.com/AbdoFawzi777)**  
+[Official Platform](https://redops-hub.web.app/) · [RedOps Hub Monorepo](https://github.com/AbdoFawzi777/redops-hub)
+
+</div>

@@ -1,6 +1,6 @@
 name: nikto_engine
-description: A modular simulation engine for RedOps Hub.
-version: 1.0.0
+description: Web server security auditor and misconfiguration scanner for Dart & Flutter. Inspired by Nikto2.
+version: 2.0.0
 publish_to: none
 
 environment:
